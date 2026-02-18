@@ -9,11 +9,12 @@
 - [Admin Frontend](https://github.com/hasol11/tesseris-erp-admin)
 
 <br>
-
+<!--
 ## 🚀 Live Demo
 **[https://kschost.ddns.net/react](https://kschost.ddns.net/react)**
 
-<br>
+<br> 
+-->
 
 ## ✨ 주요 기능
 - **사용자 맞춤형 대시보드**: 일반, 사업자, 가맹점 등 사용자의 역할에 따라 동적으로 다른 메뉴와 기능을 제공합니다.
