@@ -1,105 +1,109 @@
-# 📱 TESSERIS 사용자 프론트엔드 (User Frontend)
+# 📱 TESSERIS — User Frontend
 
-> TESSERIS 서비스를 이용하는 일반 사용자, 사업자, 가맹점을 위한 React 기반 웹 애플리케이션입니다. 사용자 친화적인 UI/UX를 통해 간편한 결제, 수당 확인, 가맹점 신청 등 다양한 기능을 제공합니다.
+> **Team Project · Personal Fork**
 
-### 🏛️ TESSERIS 전체 프로젝트 구조
-- [Main Server (ERP-PMS)](https://github.com/hasol11/tesseris-erp-backend)
-- [Alert Server](https://github.com/hasol11/tesseris-erp-alert)
-- **[User Frontend](https://github.com/hasol11/tesseris-erp-user) (👈 현재 레포지토리)**
-- [Admin Frontend](https://github.com/hasol11/tesseris-erp-admin)
+TESSERIS의 일반 사용자·사업자·가맹점이 사용하는 React 기반 User Frontend입니다.
 
-<br>
-<!--
-## 🚀 Live Demo
-**[https://kschost.ddns.net/react](https://kschost.ddns.net/react)**
+저는 **알림 기능을 중심으로 공지사항, 마이페이지, PIN 변경 등의 화면 구현과 Backend API 연동**을 담당했습니다.
 
-<br> 
--->
-
-## ✨ 주요 기능
-- **사용자 맞춤형 대시보드**: 일반, 사업자, 가맹점 등 사용자의 역할에 따라 동적으로 다른 메뉴와 기능을 제공합니다.
-- **포인트(TS) 관리**: 포인트 충전, 결제, 선물하기 등 포인트와 관련된 모든 기능을 제공합니다.
-- **가맹점 및 이벤트**: 주변 가맹점을 검색하고, 진행 중인 쿠폰 이벤트를 확인하고 참여할 수 있습니다.
-
-<br>
+---
 
 ## 🙋‍♀️ My Contribution
-사용자 경험 향상을 목표로 다음과 같은 핵심 페이지 및 기능을 개발했습니다.
 
-- **알림 시스템 (`/alert`)**
-  - 실시간으로 수신된 알림을 처리하여, 읽지 않은 알림 개수를 **헤더의 배지에 표시**하고 알림 페이지와 **상태를 동기화**하는 로직을 개발했습니다.
-  - 사용자가 알림을 클릭했을 때 **'읽음'으로 상태를 변경**하는 기능을 구현했습니다.
-  - 사용자가 공지, 쿠폰 등 유형별로 알림 수신 여부를 설정하는 페이지를 구현했습니다.
+### 🔔 Notification
 
-- **콘텐츠 및 정보 페이지**
-  - **공지사항 시스템 (`/notice`)**: 공지사항 목록과 상세 보기 페이지를 개발했습니다.
-  - **약관 및 이용동의 (`/terms`)**: 여러 종류의 약관을 사용자가 확인하고 동의할 수 있는 페이지를 구현했습니다.
+[Alert Backend](https://github.com/hasol11/tesseris-erp-alert)와 연결해  
+사용자가 알림을 조회하고 확인하는 사용자 흐름을 구현했습니다.
 
-- **마이페이지 및 보안 기능 (`/mypage`, `/pin-change`)**
-  - 일반/사업자/가맹점 등 역할에 따라 다른 메뉴가 보이는 마이페이지의 분기 처리 로직을 개발했습니다.
-  - 보안 강화를 위해 현재 비밀번호 확인을 포함한 4단계의 PIN 번호 변경 프로세스를 구현했습니다.
+- 알림 내역 조회 및 화면 표시
+- 읽지 않은 알림 개수 표시
+- Header의 Unread Badge 처리
+- 알림 확인 시 읽음 API 호출
+- 알림 목록과 Badge 상태 동기화
+- 유형별 알림 수신 설정 UI
 
-<br>
+<pre>
+Alert Backend
+      ↓
+알림 목록 조회
+      ↓
+Unread Badge 표시
+      ↓
+사용자 알림 확인
+      ↓
+읽음 API
+      ↓
+목록 / Badge 갱신
+</pre>
 
-## 🛠️ 기술 스택
-- **Library**: `React`, `React Router`
-- **UI Framework**: `Material-UI (MUI)`
-- **State Management**: `Zustand`
-- **HTTP Client**: `Axios`
-- **Real-time Communication**: `@stomp/stompjs`, `sockjs-client`
-- **Payment**: `@tosspayments/payment-sdk`
+알림 페이지 하나만 구현하는 것이 아니라  
+**같은 알림 상태가 Header와 목록에서 일관되게 보이도록 연결**했습니다.
 
-<br>
+---
 
-## 🚀 실행 방법 (Getting Started)
+### 📢 Notice
 
-### 사전 요구사항
-- Node.js: 16.0.0 이상
-- npm: 8.0.0 이상
+- 공지사항 목록 화면
+- 공지사항 상세 화면
+- [Main Backend](https://github.com/hasol11/tesseris-erp-backend) 공지 API 연동
 
-### 1. 프로젝트 클론
-```bash
-git clone https://github.com/hasol11/tesseris-erp-user.git
-cd tesseris-erp-user
-```
+---
 
-### 2. 의존성 패키지 설치
-`package.json`에 명시된 모든 라이브러리를 한 번에 설치합니다.
-```bash
-npm install
-```
+### 👤 My Page
 
-### 3. 로컬 개발 서버 실행
-```bash
-npm start
-```
-개발 서버가 실행되면 브라우저에서 `http://localhost:3000`으로 접속할 수 있습니다.
+- 사용자 정보 조회
+- Role에 따른 마이페이지 메뉴 구성
+- 일반 사용자 / 사업자 / 가맹점별 화면 분기
+- Backend 사용자 데이터 연동
 
-### 4. 환경 변수 설정
-프로젝트 루트 경로에 `.env` 파일을 생성하고 아래 내용을 추가해야 합니다.
-```
-# API 서버 URL
-REACT_APP_API_BASE_URL=http://localhost:8080
-REACT_APP_ALERT_API_URL=http://localhost:8081
+---
 
-# 결제 시스템 설정
-REACT_APP_TOSSPAYMENTS_CLIENT_KEY=your_toss_client_key
+### 🔐 PIN Change
 
-# WebSocket 설정
-REACT_APP_WEBSOCKET_URL=ws://localhost:8080/ws
-```
+현재 비밀번호 확인부터 새로운 PIN 적용까지 이어지는 단계별 사용자 Flow를 구현했습니다.
 
-<br>
+<pre>
+PIN 변경 요청
+    ↓
+현재 비밀번호 확인
+    ↓
+새 PIN 입력
+    ↓
+PIN 재확인
+    ↓
+Backend API
+</pre>
 
-## 📂 폴더 구조 (Directory Structure)
-```
-ERP-Tesseris-react/
-└── src/
-    ├── api/          # API 통신 모듈
-    ├── components/   # 재사용 가능한 컴포넌트
-    ├── context/      # React Context
-    ├── pages/        # 페이지 컴포넌트
-    ├── routes/       # 라우팅 설정
-    ├── store/        # 상태 관리 (Zustand)
-    ├── styles/       # CSS 스타일
-    └── utils/        # 유틸리티 함수
+---
+
+## 🛠 Tech Stack
+
+- React
+- React Router
+- Material UI
+- Zustand
+- Axios
+- STOMP / SockJS
+
+---
+
+## 🔗 TESSERIS Repositories
+
+| Repository | 역할 |
+| --- | --- |
+| [Main Backend](https://github.com/hasol11/tesseris-erp-backend) | ERP/PMS Main Backend |
+| [Alert Backend](https://github.com/hasol11/tesseris-erp-alert) | Notification Backend |
+| [User Frontend](https://github.com/hasol11/tesseris-erp-user) | User Web Service |
+| [Admin Frontend](https://github.com/hasol11/tesseris-erp-admin) | Admin Web Service |
+
+**Original Repository**  
+https://github.com/7GUYZ/ERP-Tesseris-react
+
+---
+
+## 👥 Team Project
+
+본 Repository는 TESSERIS 팀 프로젝트의 User Frontend 개인 Fork입니다.
+
+본 README에서는 프로젝트 전체 사용자 기능이 아닌  
+**제가 직접 구현하거나 Backend와 연결한 영역을 중심으로 정리했습니다.**
